@@ -8,7 +8,7 @@ import { PagerComponent } from './components/pager/pager.component';
   declarations: [PagingHeaderComponent, PagerComponent],
   imports: [
     CommonModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
   ],
 
   exports: [PaginationModule,
