@@ -19,7 +19,7 @@ namespace API.Errors
             return statusCode switch
             {
                 400 => "A bad request",
-                401 => "Not Authorized",
+                401 => "You Are Not Authorized",
                 404 => "Resource not found",
                 500 => "Server error",
                 _ => null  //default case
