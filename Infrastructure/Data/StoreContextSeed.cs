@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,16 +16,16 @@ namespace Infrastructure.Data
         {
             try
             {
-                if (!context.ProductBrands.Any())
+                if (!context.ProductBrands.Any()) //if we dont have any ProductBrands in our context (SQLite DB table)
 
                 {
-                    var brandsData = File.ReadAllText("../Infrastructure/Data/SeedData/brands.json");
+                    var brandsData = File.ReadAllText("../Infrastructure/Data/SeedData/brands.json"); //read brands form json file
 
                     var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
 
                     foreach (var item in brands)
                     {
-                        context.ProductBrands.Add(item);
+                        context.ProductBrands.Add(item); //add brands to contect (DB table)
                     }
 
                     await context.SaveChangesAsync();
@@ -56,6 +57,21 @@ namespace Infrastructure.Data
                     foreach (var item in products)
                     {
                         context.Products.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.DeliveryMethods.Any())
+
+                {
+                    var dmData = File.ReadAllText("../Infrastructure/Data/SeedData/delivery.json");
+
+                    var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
+
+                    foreach (var item in methods)
+                    {
+                        context.DeliveryMethods.Add(item);
                     }
 
                     await context.SaveChangesAsync();
